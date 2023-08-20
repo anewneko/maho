@@ -1,5 +1,5 @@
 package bot.discord.maho.bookkeeping.discord.util;
 
 public interface Constants {
-	String token = "NjUyODIxNTg5MDcwNDQ2NTky.Gaz9JF.P-VILLjjqVMWSHbNxMtZ-MpG10S5XG1EMkAsxw";
+	String tokenbase = "TmpVeU9ESXhOVGc1TURjd05EUTJOVGt5LkdjeVJaRS51WlY2QmZONUdfUVFTRUdSNnNiUnE0RVRwX0o4MTRvNF9UOHRGSQ==";
 }
