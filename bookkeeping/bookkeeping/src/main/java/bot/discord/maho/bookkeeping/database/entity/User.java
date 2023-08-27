@@ -30,6 +30,6 @@ public class User extends CorePojo {
 	private String password;
 	private String discordId;
 	@OneToMany
-	@JoinColumn(name = "discord_id",referencedColumnName = "discord_id")
-	private List<String> discordIds;
+	@JoinColumn(name = "discord_id",referencedColumnName = "discordId")
+	private List<Bookkeeping> Bookkeepings;
 }

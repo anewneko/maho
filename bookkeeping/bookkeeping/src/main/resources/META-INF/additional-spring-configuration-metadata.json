@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "discord.token",
-  "type": "java.lang.String",
-  "description": "the token from discord bot"
-}]}
+{"properties": [
+  {
+    "name": "discord.token",
+    "type": "java.lang.String",
+    "description": "the token from discord bot"
+  },
+  {
+    "name": "discord.playing",
+    "type": "java.lang.String",
+    "description": "what is the bot playing "
+  }
+]}
