@@ -1,14 +1,10 @@
 package bot.discord.maho.bookkeeping.database.entity;
 
-import java.util.List;
-
 import bot.discord.maho.bookkeeping.core.pojo.CorePojo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +25,4 @@ public class User extends CorePojo {
 	private String account;
 	private String password;
 	private String discordId;
-	@OneToMany
-	@JoinColumn(name = "discord_id",referencedColumnName = "discordId")
-	private List<Bookkeeping> Bookkeepings;
-}
+	}

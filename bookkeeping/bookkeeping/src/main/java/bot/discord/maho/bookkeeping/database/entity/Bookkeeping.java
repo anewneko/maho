@@ -3,6 +3,7 @@ package bot.discord.maho.bookkeeping.database.entity;
 import java.sql.Timestamp;
 
 import bot.discord.maho.bookkeeping.core.pojo.CorePojo;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,11 +27,18 @@ public class Bookkeeping extends CorePojo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bookkeepingId;
+	@Column(insertable = false)
 	private Timestamp createTime;
 	private String  item;
 	private Integer  price;
-	private String dicordId;
+	private String discordId;
 	
+	
+	public Bookkeeping(String userId , String item , Integer price) {
+		this.discordId = userId;
+		this.item = item;
+		this.price = price;
+	}
 	
 	public Integer getBookkeepingId() {
 		return bookkeepingId;
@@ -57,10 +65,10 @@ public class Bookkeeping extends CorePojo{
 		this.price = price;
 	}
 	public String getDicordId() {
-		return dicordId;
+		return discordId;
 	}
 	public void setDicordId(String dicordId) {
-		this.dicordId = dicordId;
+		this.discordId = dicordId;
 	}
 	
 	

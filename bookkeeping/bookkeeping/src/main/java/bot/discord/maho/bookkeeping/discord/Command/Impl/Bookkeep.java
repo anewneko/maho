@@ -1,20 +1,26 @@
 package bot.discord.maho.bookkeeping.discord.Command.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import bot.discord.maho.bookkeeping.database.entity.Bookkeeping;
 import bot.discord.maho.bookkeeping.discord.Command.Command;
+import bot.discord.maho.bookkeeping.discord.Dao.BookkeepingRepository;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
+@Component
 public class Bookkeep implements Command{
-	private String cmd;
-	private String describe;
+	@Autowired
+	private BookkeepingRepository bk;
+	private String cmd = this.getClass().getSimpleName().toLowerCase();
+	private String describe = "記帳用";
 	
 	
 	
-	
-	public Bookkeep(String describe) {
-		this.cmd = this.getClass().getSimpleName().toLowerCase();
-		this.describe = describe;
+	public Bookkeep() {
 	}
 
 
@@ -29,14 +35,14 @@ public class Bookkeep implements Command{
 								  .addOption(OptionType.INTEGER, "價格", "The user to ban", true);
 	}
 
-
 	@Override
-	public void commandAct() {
-		// TODO Auto-generated method stub
-		
+	public void commandAct(SlashCommandInteractionEvent event) {
+		String user = event.getUser().getId();
+		String item = event.getOption("項目").getAsString();
+		Integer price = event.getOption("價格").getAsInt();
+		bk.save(new Bookkeeping(user,item,price));
+		event.reply("OK").queue();
 	}
-	
-	
-	
-	
+
+
 }
