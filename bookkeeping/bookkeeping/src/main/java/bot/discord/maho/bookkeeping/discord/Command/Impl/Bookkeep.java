@@ -15,15 +15,9 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 public class Bookkeep implements Command{
 	@Autowired
 	private BookkeepingRepository bk;
-	private String cmd = this.getClass().getSimpleName().toLowerCase();
-	private String describe = "記帳用";
+	private final String cmd = this.getClass().getSimpleName().toLowerCase();
+	private final String describe = "記帳用";
 	
-	
-	
-	public Bookkeep() {
-	}
-
-
 	@Override
 	public SlashCommandData setCommands() {
 		return Commands.slash(cmd, describe)

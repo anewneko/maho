@@ -1,7 +1,6 @@
 package bot.discord.maho.bookkeeping.core.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,13 +17,12 @@ public class JDAConfig {
 	private StatesRepository state;
 	@Autowired
 	private EventListener listener;
-	@Value("${discord.token}")
 	private String token;
 	private String playing ;
 	
 
 	@Bean
-	public JDA jda() throws InterruptedException {
+	JDA jda() throws InterruptedException {
 		playing = state.findById("playing").get().getValue();
 		token = state.findById("token").get().getValue();
 		JDA jda = JDABuilder.createDefault(token)
