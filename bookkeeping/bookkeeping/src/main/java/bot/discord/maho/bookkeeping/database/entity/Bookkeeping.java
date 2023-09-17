@@ -2,9 +2,6 @@ package bot.discord.maho.bookkeeping.database.entity;
 
 import java.sql.Timestamp;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import bot.discord.maho.bookkeeping.core.pojo.CorePojo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
