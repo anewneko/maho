@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import bot.discord.maho.bookkeeping.database.Dao.StatesRepository;
 import bot.discord.maho.bookkeeping.discord.Command.CommandManager;
-import bot.discord.maho.bookkeeping.discord.Dao.StatesRepository;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
