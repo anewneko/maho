@@ -21,8 +21,7 @@ public class SlashCommandInteraction extends  ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 		String className = Toolbox.capitalizeFirstLetter(event.getName());
 		try {
-			Class<?> clazz = Class.forName(packageName+className);
-			Command cmd = (Command) context.getBean(clazz);
+			Command cmd = (Command) context.getBean(Class.forName(packageName+className));
 			cmd.commandAct(event);
 			
 		} catch (Exception e) {
