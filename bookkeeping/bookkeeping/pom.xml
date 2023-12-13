@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>bot.discord.maho</groupId>
-	<artifactId>bookkeeping</artifactId>
+	<artifactId>maho_bot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bookkeeping</name>
-	<description>bookkeeping bot</description>
+	<name>maho_bot</name>
+	<description>maho_bot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
