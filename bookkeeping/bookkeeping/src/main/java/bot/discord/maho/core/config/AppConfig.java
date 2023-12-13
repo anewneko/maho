@@ -17,7 +17,7 @@ import net.dv8tion.jda.api.entities.Activity;
 @PersistenceContext
 
 @Configuration
-public class JDAConfig {
+public class AppConfig {
 	@Autowired
 	private EventListener listener;
 	private String token;
