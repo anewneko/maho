@@ -2,7 +2,6 @@ package bot.discord.maho.bookkeeping.discord.Command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.reflections.Reflections;
 
@@ -11,12 +10,11 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 public class CommandManager {
 	private JDA api ;
-	private List<SlashCommandData> cmds;
+	private List<SlashCommandData> cmds = new ArrayList<>();
 	private String packageName = "bot.discord.maho.bookkeeping.discord.Command.Impl";
 
 	public CommandManager(JDA api) {
 		this.api = api ;
-		this.cmds = new ArrayList<>();
 	}
 	
 	
@@ -25,20 +23,16 @@ public class CommandManager {
 	 * */
 	public void setCommands() {
 		Reflections reflections = new Reflections(packageName);
-		Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
-		for (Class<? extends Command> clazz : classes) {
+		for (Class<? extends Command> clazz : reflections.getSubTypesOf(Command.class)) 
 			try {
-				Command cmd = clazz.getDeclaredConstructor().newInstance();
-				cmds.add(cmd.setCommands());
+				cmds.add(clazz	.getDeclaredConstructor()
+										.newInstance()
+										.setCommands());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        }
-        	api.updateCommands().addCommands(cmds).queue();
-		}
-		
-	
-	
-	
-	
+        api.updateCommands()
+        	.addCommands(cmds)
+        	.queue();
+	}
 }

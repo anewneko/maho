@@ -12,17 +12,17 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "bookkeeping", schema = "bookkeeping")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bookkeeping extends CorePojo{
 	
 	
+
+
 	private static final long serialVersionUID = -9077990332142388724L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,35 +40,33 @@ public class Bookkeeping extends CorePojo{
 		this.price = price;
 	}
 	
-	public Integer getBookkeepingId() {
-		return bookkeepingId;
-	}
-	public void setBookkeepingId(Integer bookkeepingId) {
+	public Bookkeeping setBookkeepingId(Integer bookkeepingId) {
 		this.bookkeepingId = bookkeepingId;
+		return this;
 	}
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Timestamp createTime) {
+	
+	
+	public Bookkeeping setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+		return this;
 	}
-	public String getItem() {
-		return item;
-	}
-	public void setItem(String item) {
+	
+	
+	public Bookkeeping setItem(String item) {
 		this.item = item;
+		return this;
 	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
+	
+	
+	public Bookkeeping setPrice(Integer price) {
 		this.price = price;
+		return this;
 	}
-	public String getDicordId() {
-		return discordId;
-	}
-	public void setDicordId(String dicordId) {
-		this.discordId = dicordId;
+	
+	
+	public Bookkeeping setDiscordId(String discordId) {
+		this.discordId = discordId;
+		return this;
 	}
 	
 	
