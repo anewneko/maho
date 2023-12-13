@@ -1,4 +1,4 @@
-package bot.discord.maho.bookkeeping.database.Dao;
+package bot.discord.maho.bookkeeping.database.Repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,12 +1,7 @@
 {"properties": [
   {
-    "name": "discord.token",
+    "name": "discord.state.playing",
     "type": "java.lang.String",
-    "description": "the token from discord bot"
-  },
-  {
-    "name": "discord.playing",
-    "type": "java.lang.String",
-    "description": "what is the bot playing "
+    "description": "The status for robot playing what's game"
   }
 ]}
