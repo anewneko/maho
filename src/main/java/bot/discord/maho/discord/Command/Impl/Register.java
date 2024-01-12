@@ -1,6 +1,5 @@
 package bot.discord.maho.discord.Command.Impl;
 
-import bot.discord.maho.database.entity.User;
 import bot.discord.maho.discord.Command.Command;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -21,11 +20,10 @@ public class Register implements Command {
 
 	@Override
 	public void commandAct(SlashCommandInteractionEvent event) {
-		var user = new User();
+//		var user = new User();
 		event.getOption("FirstKey").getAsString();
 		event.getOption("SecondKey").getAsString();
-		var member = event.getMember();
-		// TODO Auto-generated method stub
+//		var member = event.getMember();
 		event.reply("OK").queue();
 
 	}

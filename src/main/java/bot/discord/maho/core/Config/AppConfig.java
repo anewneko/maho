@@ -1,4 +1,4 @@
-package bot.discord.maho.core.config;
+package bot.discord.maho.core.Config;
 
 import java.util.EventListener;
 

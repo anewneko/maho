@@ -6,8 +6,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bot.discord.maho.database.Repo.PayRepository;
-import bot.discord.maho.database.entity.Pay;
+import bot.discord.maho.database.Entity.Pay;
+import bot.discord.maho.database.Repository.PayRepository;
 import bot.discord.maho.discord.Command.Command;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;

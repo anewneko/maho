@@ -1,4 +1,4 @@
-package bot.discord.maho.database.entity;
+package bot.discord.maho.database.Entity;
 
 import java.util.Date;
 
@@ -6,12 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@NoArgsConstructor
 public class Pay {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +15,17 @@ public class Pay {
 	private Date date;
 	private Integer price;
 	private String discordId;
+	
+	public Pay() {
+	}
+	
+	public Pay(Integer id, Date date, Integer price, String discordId) {
+		this.id = id;
+		this.date = date;
+		this.price = price;
+		this.discordId = discordId;
+	}
+	
 	public Pay setId(Integer id) {
 		this.id = id;
 		return this;
@@ -34,6 +41,18 @@ public class Pay {
 	public Pay setDiscordId(String discordId) {
 		this.discordId = discordId;
 		return this;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public String getDiscordId() {
+		return discordId;
 	}
 	
 	

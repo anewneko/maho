@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import bot.discord.maho.core.Util.Toolbox;
 import bot.discord.maho.discord.Command.Command;
-import bot.discord.maho.discord.util.Toolbox;
 import jakarta.annotation.Nonnull;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

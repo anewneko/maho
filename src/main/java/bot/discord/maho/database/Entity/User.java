@@ -1,28 +1,27 @@
-package bot.discord.maho.database.entity;
+package bot.discord.maho.database.Entity;
 
-import bot.discord.maho.core.pojo.CorePojo;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 @Entity
 @Table(name = "User", schema = "bookkeeping")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class User extends CorePojo {
-	private static final long serialVersionUID = -8565828708187381759L;
+public class User {
 
 	@Id
 	private String discordId;
 	private String firstKey;
 	private String secondKey;
-	private String Name;
+	private String name;
+	
+	public User() {
+	}
+	
+	public User(String discordId, String firstKey, String secondKey, String name) {
+		this.discordId = discordId;
+		this.firstKey = firstKey;
+		this.secondKey = secondKey;
+		this.name = name;
+	}
 	
 	
 	public User setDiscordId(String discordId) {
@@ -39,9 +38,23 @@ public class User extends CorePojo {
 		return this;
 	}
 	public User setName(String name) {
-		Name = name;
+		this.name = name;
 		return this;
 	}
+	public String getDiscordId() {
+		return discordId;
+	}
+	public String getFirstKey() {
+		return firstKey;
+	}
+	public String getSecondKey() {
+		return secondKey;
+	}
+	public String getName() {
+		return name;
+	}
+	
+	
 	
 	
 	}

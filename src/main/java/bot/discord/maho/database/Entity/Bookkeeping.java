@@ -1,29 +1,17 @@
-package bot.discord.maho.database.entity;
+package bot.discord.maho.database.Entity;
 
 import java.sql.Timestamp;
 
-import bot.discord.maho.core.pojo.CorePojo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "bookkeeping", schema = "bookkeeping")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Bookkeeping extends CorePojo{
-	
-	
-
-
-	private static final long serialVersionUID = -9077990332142388724L;
+public class Bookkeeping{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bookkeepingId;
@@ -32,6 +20,8 @@ public class Bookkeeping extends CorePojo{
 	private String  item;
 	private Integer  price;
 	private String discordId;
+	
+	public Bookkeeping() {}
 	
 	
 	public Bookkeeping(String userId , String item , Integer price) {
@@ -68,6 +58,33 @@ public class Bookkeeping extends CorePojo{
 		this.discordId = discordId;
 		return this;
 	}
+
+
+	public Integer getBookkeepingId() {
+		return bookkeepingId;
+	}
+
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+
+	public String getItem() {
+		return item;
+	}
+
+
+	public Integer getPrice() {
+		return price;
+	}
+
+
+	public String getDiscordId() {
+		return discordId;
+	}
+	
+	
 	
 	
 }

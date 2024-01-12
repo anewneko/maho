@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan
 public class BookkeepingApplication{
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args){
 		
 		SpringApplication.run(BookkeepingApplication.class, args);
 		
