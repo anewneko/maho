@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import bot.discord.maho.core.Util.Toolbox;
+import bot.discord.maho.core.Util.StringTool;
 import bot.discord.maho.discord.Command.Command;
 import jakarta.annotation.Nonnull;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -25,7 +25,7 @@ public class DiscordListener extends  ListenerAdapter   {
 	 *  去呼叫所屬類別的commandAct方法
 	 *  */
    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-		String className = Toolbox.capitalizeFirstLetter(event.getName());
+		String className = StringTool.capitalizeFirstLetter(event.getName());
 		try {
 			Command cmd = (Command) context.getBean(Class.forName(packageName+className));
 			cmd.commandAct(event);

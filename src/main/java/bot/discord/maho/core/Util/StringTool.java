@@ -1,6 +1,6 @@
 package bot.discord.maho.core.Util;
 
-public class Toolbox {
+public class StringTool {
 	public static String capitalizeFirstLetter(String input) {
         if (input == null || input.isEmpty()) {
             return input;
