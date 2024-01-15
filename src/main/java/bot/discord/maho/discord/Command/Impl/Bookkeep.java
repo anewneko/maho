@@ -33,7 +33,7 @@ public class Bookkeep implements Command{
 	public void commandAct(SlashCommandInteractionEvent event) {
 		Bookkeeping bkp = new Bookkeeping();
         bkp.setDiscordId(event.getUser().getId())
-			 .setItem(event.getOption("項目").getAsString())
+			 .setProject(event.getOption("項目").getAsString())
 			 .setPrice(event.getOption("價格").getAsInt());
 		bk.save(bkp);
 		event.reply("OK").queue();

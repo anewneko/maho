@@ -1,16 +1,6 @@
-package bot.discord.maho.web.Login.Model.ServiceImpl;
+package bot.discord.maho.web.Login.Model.Service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+public class UserImpl {
 
-import bot.discord.maho.database.service.UserService;
-
-public class UserImpl implements UserService{
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
