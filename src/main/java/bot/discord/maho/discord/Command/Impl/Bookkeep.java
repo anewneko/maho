@@ -3,8 +3,8 @@ package bot.discord.maho.discord.Command.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bot.discord.maho.database.Entity.Bookkeeping;
-import bot.discord.maho.database.Repository.BookkeepingRepository;
+import bot.discord.maho.database.Entity.ConsumptionItem;
+import bot.discord.maho.database.Repository.ConsumptionItemRepository;
 import bot.discord.maho.discord.Command.Command;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 @Component
 public class Bookkeep implements Command{
 	@Autowired
-	private BookkeepingRepository bk;
+	private ConsumptionItemRepository bk;
 	private final String cmd = this.getClass().getSimpleName().toLowerCase();
 	private final String describe = "記帳用";
 	
@@ -31,9 +31,9 @@ public class Bookkeep implements Command{
 
 	@Override
 	public void commandAct(SlashCommandInteractionEvent event) {
-		Bookkeeping bkp = new Bookkeeping();
+		ConsumptionItem bkp = new ConsumptionItem();
         bkp.setDiscordId(event.getUser().getId())
-			 .setProject(event.getOption("項目").getAsString())
+			 .setItem(event.getOption("項目").getAsString())
 			 .setPrice(event.getOption("價格").getAsInt());
 		bk.save(bkp);
 		event.reply("OK").queue();

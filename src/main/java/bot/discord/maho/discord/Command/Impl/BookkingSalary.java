@@ -24,7 +24,7 @@ public class BookkingSalary implements Command{
 	public SlashCommandData setCommands() {
 		return Commands.slash(cmd, describe)
 					   .setGuildOnly(true)
-					   .addOption(OptionType.INTEGER, "Pay", "The pay", true);
+					   .addOption(OptionType.INTEGER, "pay", "The pay", true);
 	}
 
 	@Override

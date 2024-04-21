@@ -1,38 +1,38 @@
 package bot.discord.maho.discord.Command;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.reflections.Reflections;
+import org.springframework.context.ApplicationContext;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 public class CommandManager {
-	private JDA api ;
-	private List<SlashCommandData> cmds = new ArrayList<>();
-	private String packageName = "bot.discord.maho.bookkeeping.discord.Command.Impl";
+	final private JDA api ;
+	final private ApplicationContext app;
+	private Set<SlashCommandData> cmds = new HashSet<>();
 
-	public CommandManager(JDA api) {
+	public CommandManager(ApplicationContext app,JDA api) {
+		this.app = app;
 		this.api = api ;
 	}
 	
 	
-	/*  自動掃描 bot.discord.maho.bookkeeping.discord.Command.Impl 內所有實作Command介面的類別
-	 *   並加入cmds內
-	 * */
 	public void setCommands() {
-		Reflections reflections = new Reflections(packageName);
-		for (Class<? extends Command> clazz : reflections.getSubTypesOf(Command.class)) 
-			try {
-				cmds.add(clazz	.getDeclaredConstructor()
-										.newInstance()
-										.setCommands());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		
+		var commands = app.getBeansOfType(Command.class);
+		
+		commands.forEach((k, v) -> addCommand(v));
+		
         api.updateCommands()
         	.addCommands(cmds)
         	.queue();
+	}
+	
+	private void addCommand(Command cmd) {
+		try {
+			cmds.add(cmd.setCommands());
+		} catch (Exception e) {/*e.printStackTrace();*/}
 	}
 }
