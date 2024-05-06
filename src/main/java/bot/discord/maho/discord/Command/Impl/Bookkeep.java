@@ -14,13 +14,11 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 @Component
 @RequiredArgsConstructor
 public class Bookkeep implements Command{
-	private final ConsumptionItemRepository bk;
-	private final String cmd = this.getClass().getSimpleName().toLowerCase();
-	private final String describe = "記帳用";
+	final private ConsumptionItemRepository bk;
 	
 	@Override
 	public SlashCommandData setCommands() {
-		return Commands.slash(cmd, describe)
+		return Commands.slash(getCmd(), "記帳用")
 //								 																								設定使用指令的權限
 //								  .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MANAGE_ROLES))
 								  .setGuildOnly(true)

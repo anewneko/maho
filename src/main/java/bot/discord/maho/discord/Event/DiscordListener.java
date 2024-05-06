@@ -16,7 +16,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class DiscordListener extends  ListenerAdapter   {
 	private boolean isReady = false;
 	private Map<String, Command> commands = new HashMap<>();
-	
 	final private ApplicationContext app;
 	
 	public void onReady(@Nonnull ReadyEvent event) {

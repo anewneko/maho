@@ -8,4 +8,8 @@ public interface Command {
 	
 	public void commandAct(SlashCommandInteractionEvent event);
 	
+	default public String getCmd() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+	
 }

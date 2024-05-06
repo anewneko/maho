@@ -1,9 +1,9 @@
 package bot.discord.maho.core.Config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,19 +17,13 @@ import net.dv8tion.jda.api.entities.Activity;
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
-	final private ApplicationContext context;
-	@Value("${discord.bot.token}") private String token;
 	
-
-	
-//	@Autowired
-//	private StringRedisTemplate redisTemplate;
-	
+	private final Environment environment;
+	 private final ApplicationContext context;
 
 	@Bean
 	JDA jda() throws Exception {
-////		token = redisTemplate.opsForValue().get("token");
-////		System.out.println(token);
+		String token = environment.getProperty("discord.bot.token");
 		JDA jda = JDABuilder.createDefault(token)
 						    .setActivity(Activity.playing("咕嚕靈波（●′∀‵）ノ♡"))
 						    .addEventListeners(new DiscordListener(context))

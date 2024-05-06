@@ -16,13 +16,11 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 @Component
 @RequiredArgsConstructor
 public class BookkingSalary implements Command{
-
-	private final String cmd = this.getClass().getSimpleName().toLowerCase();
-	private final String describe = "記帳用";
-	private final SalaryRepository repo;
+	final private SalaryRepository repo;
+	
 	@Override
 	public SlashCommandData setCommands() {
-		return Commands.slash(cmd, describe)
+		return Commands.slash(getCmd(), "記帳用")
 					   .setGuildOnly(true)
 					   .addOption(OptionType.INTEGER, "pay", "The pay", true);
 	}
