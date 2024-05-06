@@ -2,6 +2,6 @@
   {
     "name": "discord.bot.token",
     "type": "java.lang.String",
-    "description": "bot token'"
+    "description": "A description for 'discord.bot.token'"
   }
 ]}

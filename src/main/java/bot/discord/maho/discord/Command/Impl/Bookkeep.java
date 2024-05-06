@@ -1,26 +1,24 @@
 package bot.discord.maho.discord.Command.Impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import bot.discord.maho.database.Entity.ConsumptionItem;
 import bot.discord.maho.database.Repository.ConsumptionItemRepository;
 import bot.discord.maho.discord.Command.Command;
+import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 @Component
+@RequiredArgsConstructor
 public class Bookkeep implements Command{
-	@Autowired
-	private ConsumptionItemRepository bk;
-	private final String cmd = this.getClass().getSimpleName().toLowerCase();
-	private final String describe = "記帳用";
+	final private ConsumptionItemRepository bk;
 	
 	@Override
 	public SlashCommandData setCommands() {
-		return Commands.slash(cmd, describe)
+		return Commands.slash(getCmd(), "記帳用")
 //								 																								設定使用指令的權限
 //								  .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MANAGE_ROLES))
 								  .setGuildOnly(true)

@@ -12,6 +12,6 @@ public class PingController {
 
 	@GetMapping("/ping")
 	public ApiResponse ping() {
-		return new ApiResponse(200, "pong");
+		return ApiResponse.success("pong");
 	}
 }
