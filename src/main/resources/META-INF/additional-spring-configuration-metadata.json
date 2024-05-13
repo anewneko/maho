@@ -3,5 +3,10 @@
     "name": "discord.bot.token",
     "type": "java.lang.String",
     "description": "A description for 'discord.bot.token'"
+  },
+  {
+    "name": "discord.bot.version",
+    "type": "java.lang.String",
+    "description": "A description for 'discord.bot.version'"
   }
 ]}
