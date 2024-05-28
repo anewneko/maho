@@ -1,5 +1,7 @@
 package bot.discord.maho.core.Config;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 @Configuration
 @RequiredArgsConstructor
@@ -25,8 +28,9 @@ public class AppConfig {
 	JDA jda() throws Exception {
 		String token = environment.getProperty("discord.bot.token");
 		JDA jda = JDABuilder.createDefault(token)
-						    .setActivity(Activity.playing("咕嚕靈波（●′∀‵）ノ♡"))
+						    .setActivity(Activity.customStatus("咕嚕靈波（●′∀‵）ノ♡"))
 						    .addEventListeners(new DiscordListener(context))
+						    .enableIntents(List.of(GatewayIntent.values()))
 						    .build();
 		
 		new CommandManager(context,jda).setCommands();

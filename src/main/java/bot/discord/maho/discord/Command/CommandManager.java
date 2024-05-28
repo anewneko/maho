@@ -22,7 +22,6 @@ public class CommandManager {
 	public void setCommands() {
 		
 		var commands = app.getBeansOfType(Command.class);
-		
 		commands.forEach((k, v) -> addCommand(v));
 		
         api.updateCommands()
