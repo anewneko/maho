@@ -11,10 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "ConsumptionItem")
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public class ConsumptionItem{
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
@@ -22,7 +24,7 @@ public class ConsumptionItem{
 	private String  item;
 	private Integer  price;
 	private String discordId;
-	private UUID userId;
+	private Long userId;
 	private Date createTime = new Date();
 	public ConsumptionItem() {}
 	public UUID getId() {
@@ -53,10 +55,7 @@ public class ConsumptionItem{
 		this.discordId = discordId;
 		return this;
 	}
-	public UUID getUserId() {
-		return userId;
-	}
-	public ConsumptionItem setUserId(UUID userId) {
+	public ConsumptionItem setUserId(Long userId) {
 		this.userId = userId;
 		return this;
 	}
