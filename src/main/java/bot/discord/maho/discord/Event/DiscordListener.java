@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.context.ApplicationContext;
 
 import bot.discord.maho.discord.Command.Command;
-import discord4j.core.object.entity.Role;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -42,14 +41,15 @@ public class DiscordListener extends  ListenerAdapter   {
 	@Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
 		var guild = event.getGuild();
-		guild.addRoleToMember(event.getMember(), guild.getRoleById("683988941271334928")).queue();
+		guild.addRoleToMember(event.getMember(), guild.getRoleById(683988941271334928L)).queue();
     }
     
 	
 	@Override
 	  public void onMessageReceived(MessageReceivedEvent event) {
 		try {
-			var message = event.getChannel().getIterableHistory().stream().findFirst().orElseGet(null);
+			var message = event.getMessage();
+//			var message = event.getChannel().getIterableHistory().stream().findFirst().orElseGet(null);
 			var proxyUrl = message.getAttachments().stream()
 								  .map(el -> el.getProxyUrl())
 								  .collect(Collectors.toList());
