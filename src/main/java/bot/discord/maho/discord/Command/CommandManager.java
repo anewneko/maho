@@ -9,13 +9,13 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 public class CommandManager {
-	final private JDA api ;
+	final private JDA bot ;
 	final private ApplicationContext app;
 	private Set<SlashCommandData> cmds = new HashSet<>();
 
-	public CommandManager(ApplicationContext app,JDA api) {
+	public CommandManager(ApplicationContext app,JDA bot) {
 		this.app = app;
-		this.api = api ;
+		this.bot = bot ;
 	}
 	
 	
@@ -24,9 +24,9 @@ public class CommandManager {
 		var commands = app.getBeansOfType(Command.class);
 		commands.forEach((k, v) -> addCommand(v));
 		
-        api.updateCommands()
-        	.addCommands(cmds)
-        	.queue();
+        bot.updateCommands()
+           .addCommands(cmds)
+           .queue();
 	}
 	
 	private void addCommand(Command cmd) {

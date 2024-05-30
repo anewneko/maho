@@ -22,7 +22,7 @@ public class DiscordListener extends  ListenerAdapter   {
 	final private ApplicationContext app;
 	
 	private final static String MSG_TEMPLATE = "[%s][%s] %#s: %s \n";
-	private final static String URL_MSG_TEMPLATE = "[%s][%s] %#s: %s\n url[%s]\n";
+	private final static String URL_MSG_TEMPLATE = "[%s][%s] %#s: %s\n url:[%s]\n";
 	
 	@Override
 	public void onReady(@Nonnull ReadyEvent event) {
@@ -40,8 +40,16 @@ public class DiscordListener extends  ListenerAdapter   {
     
 	@Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
+		var welcome = """
+				%s 歡迎來到 プリコネR 戰隊 －【天都紀元】 的 Discord 頻道
+				如有意願加入，請輸入 /面試 進行面試。
+				""";
+		
 		var guild = event.getGuild();
-		guild.addRoleToMember(event.getMember(), guild.getRoleById(683988941271334928L)).queue();
+		guild.getTextChannelById(651478929550606366L)
+			 .sendMessage(String.format(welcome, event.getMember().getAsMention()))
+			 .queue();
+//		guild.addRoleToMember(event.getMember(), guild.getRoleById(683988941271334928L)).queue();
     }
     
 	
@@ -53,12 +61,12 @@ public class DiscordListener extends  ListenerAdapter   {
 			var proxyUrl = message.getAttachments().stream()
 								  .map(el -> el.getProxyUrl())
 								  .collect(Collectors.toList());
-			System.out.printf( message.getAttachments().size() == 0 ? MSG_TEMPLATE : URL_MSG_TEMPLATE,
-					message.getGuild().getName(),
-					message.getChannel().getName(),
-					message.getAuthor(),
-					message.getContentDisplay(),
-					String.join(",", proxyUrl));
+			System.out.printf(message.getAttachments().size() == 0 ? MSG_TEMPLATE : URL_MSG_TEMPLATE,
+							  message.getGuild().getName(),
+							  message.getChannel().getName(),
+							  message.getAuthor(),
+							  message.getContentDisplay(),
+							  String.join(",", proxyUrl));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package bot.discord.maho.discord.Domain;
+package bot.discord.maho.discord.Model;
 
 import java.util.ArrayList;
 import java.util.List;
