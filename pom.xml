@@ -10,9 +10,10 @@
 	</parent>
 	<groupId>bot.discord.maho</groupId>
 	<artifactId>maho_bot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>maho_bot</name>
 	<description>maho_bot</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -81,14 +82,10 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-    		<groupId>org.reflections</groupId>
-    		<artifactId>reflections</artifactId>
-    		<version>0.9.12</version>
-		</dependency>
 <!--		<dependency>-->
-<!--    		<groupId>org.springframework.boot</groupId>-->
-<!--    		<artifactId>spring-boot-starter-security</artifactId>-->
+<!--    		<groupId>org.reflections</groupId>-->
+<!--    		<artifactId>reflections</artifactId>-->
+<!--    		<version>0.9.12</version>-->
 <!--		</dependency>-->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
