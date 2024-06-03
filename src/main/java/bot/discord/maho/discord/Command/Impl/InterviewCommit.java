@@ -49,6 +49,7 @@ public class InterviewCommit implements Command  {
 			
 			list.stream()
 				.skip(1)
+				.filter(el -> event.getMember().getId().equals(el.getAuthor().getId()))
 				.forEach(el -> moveAndClearMsg(event, el));
 			
 			event.getHook().sendMessage("已經提交面試資料，請等待管理員審核。").queue();
@@ -88,10 +89,20 @@ public class InterviewCommit implements Command  {
 						  return FileUpload.fromData(in, att.getFileName());
 					  })
 					  .collect(Collectors.toList());
+		el.getContentDisplay().replaceAll(description, cmd);
+		var emoji = event.getGuild()
+						 .getEmojis()
+						 .stream()
+						 .collect(Collectors.toMap(e -> e.getName(), e -> String.format("<:%s:%s>", e.getName(),e.getId())));
+		var str = el.getContentDisplay();
+		
+		for (var emo : emoji.entrySet()) 
+			str = str.replaceAll(":"+emo.getKey()+":", emo.getValue());
+		
 		
 		event.getGuild()
 			 .getTextChannelById(659405580661817354L)
-			 .sendMessage(el.getContentDisplay())
+			 .sendMessage(str)
 			 .addFiles(files)
 			 .queue();
 		
