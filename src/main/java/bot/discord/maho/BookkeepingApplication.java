@@ -1,10 +1,10 @@
 package bot.discord.maho;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +16,10 @@ public class BookkeepingApplication {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		SpringApplication app = new SpringApplication(BookkeepingApplication.class);
-		var bannerFile = new File("./src/main/java/bot/discord/maho/banner.txt");
-		try (var bannerReader = new BufferedReader(new FileReader(bannerFile))) {
+		
+		try (var in = BookkeepingApplication.class.getResourceAsStream("/banner.txt");
+			 var reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+			 var bannerReader = new BufferedReader(reader)) {
 			var banner = new StringBuilder();
 			String line;
 			while ((line = bannerReader.readLine()) != null) 
