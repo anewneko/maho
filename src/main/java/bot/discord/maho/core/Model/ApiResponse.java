@@ -1,4 +1,4 @@
-package bot.discord.maho.core.POJO;
+package bot.discord.maho.core.Model;
 
 import java.io.Serializable;
 
