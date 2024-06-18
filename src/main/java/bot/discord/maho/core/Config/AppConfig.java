@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 
 import bot.discord.maho.discord.Command.CommandManager;
 import bot.discord.maho.discord.Event.DiscordListener;
@@ -34,5 +35,10 @@ public class AppConfig {
 		jda.awaitReady();
 		System.out.println("Bot is Online");
 		return jda;
+	}
+	
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }

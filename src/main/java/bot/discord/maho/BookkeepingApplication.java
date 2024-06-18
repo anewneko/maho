@@ -13,6 +13,7 @@ public class BookkeepingApplication {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		SpringApplication app = new SpringApplication(BookkeepingApplication.class);
-			app.run(args);
+		app.run(args);
+			
 	}
 }

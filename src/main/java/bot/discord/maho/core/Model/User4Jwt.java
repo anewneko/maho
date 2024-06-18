@@ -5,8 +5,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Data;
+@Data
 public class User4Jwt implements UserDetails {
 	private static final long serialVersionUID = 6228579724714609705L;
+	private String discordId;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -23,7 +26,7 @@ public class User4Jwt implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return "12312312";
+		return discordId;
 	}
 
 	@Override
