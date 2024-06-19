@@ -5,13 +5,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import bot.discord.maho.core.Model.ApiResponse;
-import bot.discord.maho.core.Util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 public class PingController {
-	private final JwtTokenUtil jwtService;
 
 	@GetMapping("/ping")
 	public ApiResponse ping() {
@@ -20,7 +18,6 @@ public class PingController {
 	
 	@GetMapping("/login")
 	public ApiResponse login() {
-		jwtService.refreshToken();
 		return ApiResponse.success("Login");
 	}
 	

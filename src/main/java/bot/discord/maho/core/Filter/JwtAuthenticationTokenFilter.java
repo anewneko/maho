@@ -32,6 +32,5 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			securityTool.verift(jwt, user);
 		
 		filterChain.doFilter(request, response);
-		
 	}
 }

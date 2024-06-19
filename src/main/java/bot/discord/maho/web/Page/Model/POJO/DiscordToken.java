@@ -1,4 +1,4 @@
-package bot.discord.maho.web.Page.Model;
+package bot.discord.maho.web.Page.Model.POJO;
 
 public class DiscordToken {
 	private String token_type;

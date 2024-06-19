@@ -18,5 +18,10 @@
     "name": "discord.app.secret",
     "type": "java.lang.String",
     "description": "A description for 'discord.app.secret'"
+  },
+  {
+    "name": "discord.app.redirect",
+    "type": "java.lang.String",
+    "description": "A description for 'discord.app.redirect'"
   }
 ]}

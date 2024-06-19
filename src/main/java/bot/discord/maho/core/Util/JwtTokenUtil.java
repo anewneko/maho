@@ -14,10 +14,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import bot.discord.maho.core.Model.User4Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
@@ -28,12 +28,6 @@ public class JwtTokenUtil {
 	private JwtTokenUtil(Environment environment) throws NoSuchAlgorithmException {
 		String token = environment.getProperty("discord.bot.token");
 		secretKey = new SecretKeySpec(token.getBytes(), "HmacSHA256");
-	}
-	
-	public String refreshToken() {
-		var token = generateToken(User4Jwt.fake());
-		response.setHeader("Authorization", "Bearer " + token);
-		return token;
 	}
 
     public String getOwner(String token) {
@@ -62,9 +56,11 @@ public class JwtTokenUtil {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+    public void generateToken(UserDetails userDetails) {
+    	Map<String, Object> claims = new HashMap<>();
+    	 Cookie cookie = new Cookie("Maho_token", doGenerateToken(claims, userDetails.getUsername()));
+         cookie.setPath("/");
+         response.addCookie(cookie);
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {

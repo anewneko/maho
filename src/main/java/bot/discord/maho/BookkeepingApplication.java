@@ -12,8 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BookkeepingApplication {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		SpringApplication app = new SpringApplication(BookkeepingApplication.class);
-		app.run(args);
+		try {
+			SpringApplication app = new SpringApplication(BookkeepingApplication.class);
+			app.run(args);
+			
+		} 
+		catch (RuntimeException se) {
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 			
 	}
 }

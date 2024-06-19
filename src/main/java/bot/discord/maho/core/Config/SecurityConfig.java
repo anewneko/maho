@@ -42,7 +42,6 @@ public class SecurityConfig{
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(req -> req.requestMatchers(new AntPathRequestMatcher("/redirect/**"),
-            												  new AntPathRequestMatcher("/login"),
             												  new AntPathRequestMatcher("/ping")).permitAll()
                                              .anyRequest().authenticated())
             .sessionManagement(sessionManagement -> 

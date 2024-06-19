@@ -1,10 +1,10 @@
-package bot.discord.maho.web.Page.Model;
+package bot.discord.maho.web.Page.Model.POJO;
 
 import lombok.Data;
 
 @Data
 public class DiscordUser {
-	private String id;
+	private Long id;
 	private String username;
 	private String avatar;
 	private String locale;

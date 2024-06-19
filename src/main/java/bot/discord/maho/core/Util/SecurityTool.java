@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
+import bot.discord.maho.core.Model.JwtOwner;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -17,11 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class SecurityTool {
 	private final JwtTokenUtil jwtService;
 	@Autowired private HttpServletRequest request;
+	@Autowired private JwtOwner jwtOwner;
 	
-	public void verift(String jwt , UserDetails user ) throws AuthenticationException {
+	public void verift(String jwt , UserDetails user) throws AuthenticationException {
 		if (jwtService.validateToken(jwt, user)){
 			permit(user);
-			jwtService.refreshToken();
+			jwtService.generateToken(user);
+			jwtOwner.setUser(user);
 		}
 		else 
 			throw new AuthenticationException();
