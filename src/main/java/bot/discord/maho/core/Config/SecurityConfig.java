@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.security.Component.SecurityUserService;
 import bot.discord.maho.security.Filter.JwtAuthenticationTokenFilter;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig{
 	
 	private final JwtAuthenticationTokenFilter jwtAuthFilter;
-    @Autowired private UserService userSvc;
+    @Autowired private SecurityUserService userSvc;
     
 	@Bean
     BCryptPasswordEncoder passwordEncoder() {
