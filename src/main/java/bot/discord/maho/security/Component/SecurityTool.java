@@ -17,13 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class SecurityTool {
 	private final JwtTokenUtil jwtService;
 	@Autowired private HttpServletRequest request;
-	@Autowired private JwtOwner jwtOwner;
 	
 	public void verift(String jwt , UserDetails user) throws AuthenticationException {
 		if (jwtService.validateToken(jwt, user)){
 			permit(user);
 			jwtService.generateToken(user);
-			jwtOwner.setUser(user);
 		}
 		else 
 			throw new AuthenticationException();
