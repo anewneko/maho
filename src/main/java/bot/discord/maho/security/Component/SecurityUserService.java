@@ -25,16 +25,16 @@ public class SecurityUserService  implements UserDetailsService  {
 		return loadAndVerify(() -> userService.findById(username));
 	}
 	
-	public UserDetails loadUserByDiscordId(Long discordId) {
+	public UserDetails loadUserByDiscordId(Long discordId) throws UsernameNotFoundException  {
 		return loadAndVerify(() -> userService.findByDiscordId(discordId));
 	}
 	
 	private UserDetails loadAndVerify(Supplier<Member> supplier) {
 		var user = supplier.get();
-		if (user == null)
-			throw new UsernameNotFoundException("User not found");
-		else
+		if (user != null)
 			owner.of(user);
+		else
+			return null;
 		return User4Jwt.of(user);
 	}
 

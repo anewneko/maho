@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.database.Entity.Member;
 import bot.discord.maho.security.Component.DiscordAPI;
 import bot.discord.maho.security.Component.JwtTokenUtil;
 import bot.discord.maho.security.Model.User4Jwt;
@@ -19,16 +20,13 @@ public class RedirectController {
 	
 	@GetMapping("/redirect/mahoweb/homepage")
     public String redirectToExternalUrl(@PathParam("code") String code) {
-			
 		var token = api.getToken(code);
 		var user = api.getUserInfo(token);
-		var member = memberService.findByDiscordId(user.getId());
-		
-		if (member == null) 
-			memberService.createUser(member);
-		
+		Member member =  memberService.findByDiscordId(user.getId());
+		if(member == null)
+			member = memberService.createUser(Member.of(user));
+				
 		jwtService.generateToken(User4Jwt.of(member));
-		
         return "redirect:http://localhost:3000/";
     }
 }
