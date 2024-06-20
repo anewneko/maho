@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import bot.discord.maho.web.Page.Model.POJO.DiscordUser;
+import bot.discord.maho.security.Model.DiscordUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;

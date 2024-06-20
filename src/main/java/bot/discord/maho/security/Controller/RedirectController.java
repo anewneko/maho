@@ -1,12 +1,12 @@
-package bot.discord.maho.web.Page;
+package bot.discord.maho.security.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import bot.discord.maho.core.Util.JwtTokenUtil;
 import bot.discord.maho.database.CrudService.UserService;
-import bot.discord.maho.database.Entity.Member;
-import bot.discord.maho.web.Page.Model.DiscordAPI;
+import bot.discord.maho.security.Component.DiscordAPI;
+import bot.discord.maho.security.Component.JwtTokenUtil;
+import bot.discord.maho.security.Model.User4Jwt;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 
@@ -15,20 +15,19 @@ import lombok.RequiredArgsConstructor;
 public class RedirectController {
 	final private JwtTokenUtil jwtService;
 	final private DiscordAPI api;
-	final private UserService userService;
+	final private UserService memberService;
 	
 	@GetMapping("/redirect/mahoweb/homepage")
     public String redirectToExternalUrl(@PathParam("code") String code) {
 			
 		var token = api.getToken(code);
 		var user = api.getUserInfo(token);
-		
-		var member = userService.loadUserByDiscordId(user.getId());
+		var member = memberService.findByDiscordId(user.getId());
 		
 		if (member == null) 
-			member = userService.createUser(Member.of(user));
+			memberService.createUser(member);
 		
-		jwtService.generateToken(member);
+		jwtService.generateToken(User4Jwt.of(member));
 		
         return "redirect:http://localhost:3000/";
     }

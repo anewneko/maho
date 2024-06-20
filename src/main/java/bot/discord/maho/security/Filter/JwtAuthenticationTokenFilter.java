@@ -1,14 +1,14 @@
-package bot.discord.maho.core.Filter;
+package bot.discord.maho.security.Filter;
 
 import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import bot.discord.maho.core.Model.AuthHeader;
-import bot.discord.maho.core.Util.JwtTokenUtil;
-import bot.discord.maho.core.Util.SecurityTool;
-import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.security.Component.JwtTokenUtil;
+import bot.discord.maho.security.Component.SecurityTool;
+import bot.discord.maho.security.Component.SecurityUserService;
+import bot.discord.maho.security.Model.AuthHeader;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	private final JwtTokenUtil jwtService;
-    private final UserService userService;
+    private final SecurityUserService userService;
     private final SecurityTool securityTool;
 
 	@Override

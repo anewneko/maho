@@ -1,4 +1,4 @@
-package bot.discord.maho.core.Util;
+package bot.discord.maho.security.Component;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;

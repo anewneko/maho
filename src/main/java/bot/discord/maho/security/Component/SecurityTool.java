@@ -1,4 +1,4 @@
-package bot.discord.maho.core.Util;
+package bot.discord.maho.security.Component;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
-import bot.discord.maho.core.Model.JwtOwner;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 

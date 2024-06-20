@@ -1,4 +1,4 @@
-package bot.discord.maho.web.Page.Model;
+package bot.discord.maho.security.Component;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -10,8 +10,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import bot.discord.maho.web.Page.Model.POJO.DiscordToken;
-import bot.discord.maho.web.Page.Model.POJO.DiscordUser;
+import bot.discord.maho.security.Model.DiscordToken;
+import bot.discord.maho.security.Model.DiscordUser;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service

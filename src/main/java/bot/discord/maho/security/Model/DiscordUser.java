@@ -1,4 +1,4 @@
-package bot.discord.maho.web.Page.Model.POJO;
+package bot.discord.maho.security.Model;
 
 import lombok.Data;
 

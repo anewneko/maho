@@ -1,4 +1,4 @@
-package bot.discord.maho.core.Model;
+package bot.discord.maho.security.Model;
 
 import java.util.Collection;
 import java.util.List;

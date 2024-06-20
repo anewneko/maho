@@ -1,4 +1,4 @@
-package bot.discord.maho.core.Model;
+package bot.discord.maho.security.Model;
 
 public class AuthHeader {
 	private String content = "";

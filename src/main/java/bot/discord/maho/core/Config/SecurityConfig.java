@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import bot.discord.maho.core.Filter.JwtAuthenticationTokenFilter;
 import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.security.Filter.JwtAuthenticationTokenFilter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration

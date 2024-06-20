@@ -1,4 +1,4 @@
-package bot.discord.maho.web.Login.Controller;
+package bot.discord.maho.api.Login.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
