@@ -11,6 +11,14 @@ public class MahoTool {
         return capitalizedFirstChar + input.substring(1);
     }
 	
+	public static Boolean isEmpty(String input) {
+		return input == null || input.isEmpty();
+	}
+	
+	public static Boolean isEmpty(Object input) {
+		return input == null;
+	}
+	
 	public static Boolean isUUID(String input) {
 		try {
 			UUID.fromString(input);

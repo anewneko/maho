@@ -27,7 +27,7 @@ public class UserService{
 		return repo.findByDiscordId(discordId);
 	}
 	
-	public Member createUser(Member member) {
+	public Member save(Member member) {
 		return repo.save(member);
 	}
 }

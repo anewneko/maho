@@ -24,7 +24,9 @@ public class RedirectController {
 		var user = api.getUserInfo(token);
 		Member member =  memberService.findByDiscordId(user.getId());
 		if(member == null)
-			member = memberService.createUser(Member.of(user));
+			member = memberService.save(Member.of(user));
+		if(member.update(user))
+			memberService.save(member);
 				
 		jwtService.generateToken(User4Jwt.of(member));
         return "redirect:http://localhost:3000/";
