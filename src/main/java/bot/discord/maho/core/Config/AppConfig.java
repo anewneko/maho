@@ -38,7 +38,7 @@ public class AppConfig {
 	}
 	
 	@Bean
-	RestTemplate restTemplate() {
+	RestTemplate restTemplate() throws Exception {
 		return new RestTemplate();
 	}
 }

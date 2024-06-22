@@ -26,12 +26,12 @@ public class SecurityConfig{
     @Autowired private SecurityUserService userSvc;
     
 	@Bean
-    BCryptPasswordEncoder passwordEncoder() {
+    BCryptPasswordEncoder passwordEncoder() throws Exception{
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-    AuthenticationProvider authenticationProvider() {
+    AuthenticationProvider authenticationProvider() throws Exception {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userSvc);
         provider.setPasswordEncoder(passwordEncoder());

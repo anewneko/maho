@@ -21,7 +21,9 @@ public class SecurityTool {
 	public void verift(String jwt , UserDetails user) throws AuthenticationException {
 		if (jwtService.validateToken(jwt, user)){
 			permit(user);
-			jwtService.generateToken(user);
+			var exp = jwtService.getExpirationDate(jwt);
+			if(exp.getTime() - System.currentTimeMillis() < 1000 * 60 * 60 * 24 )
+				jwtService.generateToken(user);
 		}
 		else 
 			throw new AuthenticationException();
