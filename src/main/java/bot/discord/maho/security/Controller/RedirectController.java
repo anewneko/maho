@@ -22,7 +22,8 @@ public class RedirectController {
     public String redirectToExternalUrl(@PathParam("code") String code) {
 		var token = api.getToken(code);
 		var user = api.getUserInfo(token);
-		Member member =  memberService.findByDiscordId(user.getId());
+		var member =  memberService.findByDiscordId(user.getId());
+		
 		if(member == null)
 			member = memberService.save(Member.of(user));
 		if(member.update(user))

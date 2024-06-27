@@ -33,9 +33,13 @@ public class DiscordListener extends  ListenerAdapter   {
 	
 	@Override
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-		if(!isReady) 
-			initCommands();
-		commands.get(event.getName()).commandAct(event);
+		try {
+			if(!isReady) 
+				initCommands();
+			commands.get(event.getName()).commandAct(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
     
 	@Override
@@ -44,12 +48,14 @@ public class DiscordListener extends  ListenerAdapter   {
 				%s 歡迎來到 プリコネR 戰隊 －【天都紀元】 的 Discord 頻道
 				如有意願加入，請輸入 /面試 進行面試。
 				""";
-		
-		var guild = event.getGuild();
-		guild.getTextChannelById(651478929550606366L)
-			 .sendMessage(String.format(welcome, event.getMember().getAsMention()))
-			 .queue();
-//		guild.addRoleToMember(event.getMember(), guild.getRoleById(683988941271334928L)).queue();
+		try {
+			var guild = event.getGuild();
+			guild.getTextChannelById(651478929550606366L)
+				 .sendMessage(String.format(welcome, event.getMember().getAsMention()))
+				 .queue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
 	
@@ -73,10 +79,16 @@ public class DiscordListener extends  ListenerAdapter   {
 	  }
    
 	private void initCommands() {
-		this.commands = app.getBeansOfType(Command.class)
-						   .values()
-						   .stream()
-						   .collect(Collectors.toMap(e -> e.getCmd(), e -> e));
-		isReady = true;
+		try {
+			
+			this.commands = app.getBeansOfType(Command.class)
+					.values()
+					.stream()
+					.collect(Collectors.toMap(e -> e.getCmd(), e -> e));
+			isReady = true;
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			isReady = false;
+		}
 	}
 }
