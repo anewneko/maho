@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import bot.discord.maho.core.Model.DbEntity;
 import bot.discord.maho.core.Util.MahoTool;
 import bot.discord.maho.security.Model.DiscordUser;
 import jakarta.persistence.Entity;
@@ -20,8 +21,7 @@ import net.dv8tion.jda.api.entities.User;
 @Table(name = "Member")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class Member {
-
+public class Member extends DbEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
@@ -35,11 +35,6 @@ public class Member {
 	
 	public Member() {
 		this.createTime = new Date();
-	}
-
-	public Member setId(UUID id) {
-		this.id = id;
-		return this;
 	}
 	
 	public Member setIsManager(Boolean isManager) {

@@ -18,6 +18,7 @@ public class BookkeepingApplication {
 			
 		} 
 		catch (RuntimeException se) {
+			se.printStackTrace();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

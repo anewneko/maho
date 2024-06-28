@@ -3,7 +3,7 @@ package bot.discord.maho.security.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.database.CrudService.Impl.UserService;
 import bot.discord.maho.database.Entity.Member;
 import bot.discord.maho.security.Component.DiscordAPI;
 import bot.discord.maho.security.Component.JwtTokenUtil;

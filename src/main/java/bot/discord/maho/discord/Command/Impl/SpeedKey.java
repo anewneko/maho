@@ -34,7 +34,7 @@ public class SpeedKey  implements Command {
 		
 		member.setSpeedkey(key);
 		memberRepo.save(member);
-		event.reply("取得key性鑰匙 : " + key).setEphemeral(true).queue();
+		event.reply("取得一次性鑰匙 : " + key).setEphemeral(true).queue();
 	}
 	
 	@Override

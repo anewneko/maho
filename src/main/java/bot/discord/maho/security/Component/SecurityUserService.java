@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import bot.discord.maho.database.CrudService.UserService;
+import bot.discord.maho.database.CrudService.Impl.UserService;
 import bot.discord.maho.database.Entity.Member;
 import bot.discord.maho.security.Model.User4Jwt;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class SecurityUserService  implements UserDetailsService  {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return loadAndVerify(() -> userService.findById(username));
+		return loadAndVerify(() -> userService.findById(username).orElse(null));
 	}
 	
 	public UserDetails loadUserByDiscordId(Long discordId) throws UsernameNotFoundException  {
