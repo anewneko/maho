@@ -20,21 +20,23 @@ public abstract class CacheRepository<V extends DbEntity> {
 	
 	
 	public synchronized CacheRepository<V> fetch(Supplier<V> fetcher){
-		async(() -> {
-            var v = fetcher.get();
-            if(v != null) 
-            	map.putAll(Structure.toKeyValueMap(List.of(v)));
-            
-        });
+		await()
+			.async(() -> {
+	            var v = fetcher.get();
+	            if(v != null) 
+	            	map.putAll(Structure.toKeyValueMap(List.of(v)));
+	            
+	        });
 		return this;
 	}
 	
 	public synchronized CacheRepository<V> fetchAll(Supplier<Collection<V>> fetcher){
-		async(() -> {
-			var coll = fetcher.get();
-			var list = new ArrayList<V>(coll);
-			map.putAll(Structure.toKeyValueMap(list));
-		});
+		await()
+			.async(() -> {
+				var coll = fetcher.get();
+				var list = new ArrayList<V>(coll);
+				map.putAll(Structure.toKeyValueMap(list));
+			});
 		return this;
 	}
 	
@@ -91,7 +93,7 @@ public abstract class CacheRepository<V extends DbEntity> {
 	protected CacheRepository<V> await() {
 		while (!initialized) {
 			try {
-				System.out.println("Waiting for initialization");
+				System.out.println("Waiting for fetcher to finish...");
 				wait(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

@@ -26,11 +26,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		try {
 			System.out.println("request_url: " + request.getRequestURL());
+			
 			var jwt = AuthHeader.of(request.getHeader("Authorization")).getJwt();
 			var owner = jwt.isEmpty() ? "" : jwtService.getOwner(jwt);
 			var user = userService.loadUserByUsername(owner);
 			if (user != null) 
 				securityTool.verift(jwt, user);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

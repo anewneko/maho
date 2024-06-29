@@ -1,5 +1,9 @@
 package bot.discord.maho.security.Controller;
 
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,6 +21,7 @@ public class RedirectController {
 	final private JwtTokenUtil jwtService;
 	final private DiscordAPI api;
 	final private UserService memberService;
+	final private RedisTemplate<String,String> redisTemplate;
 	
 	@GetMapping("/redirect/mahoweb/homepage")
     public String redirectToExternalUrl(@PathParam("code") String code) {
@@ -28,8 +33,11 @@ public class RedirectController {
 			member = memberService.save(Member.of(user));
 		if(member.update(user))
 			memberService.save(member);
-				
-		jwtService.generateToken(User4Jwt.of(member));
-        return "redirect:http://localhost:3000/";
+		
+		var jwt = jwtService.generateToken(User4Jwt.of(member));
+		var uuid = UUID.randomUUID().toString();
+		redisTemplate.opsForValue().set(uuid, jwt , 10L , TimeUnit.SECONDS);
+			
+        return "redirect:https://mahorobo.org?id=" + uuid;
     }
 }

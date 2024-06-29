@@ -26,7 +26,6 @@ public class DiscordAPI {
 	public DiscordToken getToken(String code) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-	    var redirectUrl = "http://localhost:8081/mahoBotServer/redirect/mahoweb/homepage";
 	    
 	    MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("code", code);
