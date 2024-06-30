@@ -1,0 +1,17 @@
+discord:
+  app:
+    client:
+      id: ${pro_client_id}
+    redirect: https://serv.mahorobo.org/mahoBotServer/redirect/mahoweb/homepage
+    frontend: https://mahorobo.org
+    secret: ${pro_secret}
+  bot:
+    token: ${pro_token}
+    version: 1.0.0
+server:
+  port: 8080
+  servlet:
+    context-path: /mahoBotServer
+spring:
+  thymeleaf:
+    enabled: false

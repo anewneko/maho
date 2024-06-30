@@ -3,6 +3,7 @@ package bot.discord.maho.security.Controller;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class RedirectController {
 	final private DiscordAPI api;
 	final private UserService memberService;
 	final private RedisTemplate<String,String> redisTemplate;
+	@Value("${discord.app.frontend}") private String frontEndUrl;
 	
 	@GetMapping("/redirect/mahoweb/homepage")
     public String redirectToExternalUrl(@PathParam("code") String code) {
@@ -38,6 +40,6 @@ public class RedirectController {
 		var uuid = UUID.randomUUID().toString();
 		redisTemplate.opsForValue().set(uuid, jwt , 10L , TimeUnit.SECONDS);
 			
-        return "redirect:https://mahorobo.org?id=" + uuid;
+        return "redirect:"+ frontEndUrl +"?id=" + uuid;
     }
 }
