@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import bot.discord.maho.security.Component.JwtTokenUtil;
 import bot.discord.maho.security.Component.SecurityTool;
-import bot.discord.maho.security.Component.SecurityUserService;
 import bot.discord.maho.security.Model.AuthHeader;
+import bot.discord.maho.security.Service.JwtService;
+import bot.discord.maho.security.Service.SecurityUserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
-	private final JwtTokenUtil jwtService;
+	private final JwtService jwtService;
     private final SecurityUserService userService;
     private final SecurityTool securityTool;
 

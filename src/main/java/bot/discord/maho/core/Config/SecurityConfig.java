@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import bot.discord.maho.security.Component.SecurityUserService;
 import bot.discord.maho.security.Filter.JwtAuthenticationTokenFilter;
+import bot.discord.maho.security.Service.SecurityUserService;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -43,6 +43,7 @@ public class SecurityConfig{
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(req -> req.requestMatchers(new AntPathRequestMatcher("/redirect/**"),
             		                                          new AntPathRequestMatcher("/member/jwt/**"),
+            		                                          new AntPathRequestMatcher("/login/**"),
             												  new AntPathRequestMatcher("/ping")).permitAll()
                                              .anyRequest().authenticated())
             .sessionManagement(sessionManagement -> 

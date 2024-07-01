@@ -34,6 +34,10 @@ public class ApiResponse implements Serializable{
 		return new ApiResponse(message, code);
 	}
 	
+	public static ApiResponse success() {
+		return new ApiResponse();
+	}
+	
 	public static ApiResponse success(Object data) {
 		return new ApiResponse(data);
 	}

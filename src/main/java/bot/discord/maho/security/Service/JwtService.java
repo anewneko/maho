@@ -1,4 +1,4 @@
-package bot.discord.maho.security.Component;
+package bot.discord.maho.security.Service;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -18,10 +18,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class JwtTokenUtil {
+public class JwtService {
 	private final Key secretKey;
 	
-	private JwtTokenUtil(Environment environment) throws NoSuchAlgorithmException {
+	private JwtService(Environment environment) throws NoSuchAlgorithmException {
 		String token = environment.getProperty("discord.bot.token");
 		secretKey = new SecretKeySpec(token.getBytes(), "HmacSHA256");
 	}

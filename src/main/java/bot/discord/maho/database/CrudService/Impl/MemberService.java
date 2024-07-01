@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements CrudService<Member>{
+public class MemberService implements CrudService<Member>{
 	private final MemberRepository repo;
 	
 	@Override

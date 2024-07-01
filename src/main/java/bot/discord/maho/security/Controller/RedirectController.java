@@ -8,37 +8,34 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import bot.discord.maho.database.CrudService.Impl.UserService;
-import bot.discord.maho.database.Entity.Member;
-import bot.discord.maho.security.Component.DiscordAPI;
-import bot.discord.maho.security.Component.JwtTokenUtil;
 import bot.discord.maho.security.Model.User4Jwt;
+import bot.discord.maho.security.Service.DiscordAPI;
+import bot.discord.maho.security.Service.JwtService;
+import bot.discord.maho.security.Service.UpdateMemberService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class RedirectController {
-	final private JwtTokenUtil jwtService;
+	final private JwtService jwtService;
 	final private DiscordAPI api;
-	final private UserService memberService;
+	final private UpdateMemberService updateMemberService;
 	final private RedisTemplate<String,String> redisTemplate;
 	@Value("${discord.app.frontend}") private String frontEndUrl;
 	
 	@GetMapping("/redirect/mahoweb/homepage")
     public String redirectToExternalUrl(@PathParam("code") String code) {
-		var token = api.getToken(code);
-		var user = api.getUserInfo(token);
-		var member =  memberService.findByDiscordId(user.getId());
-		
-		if(member == null)
-			member = memberService.save(Member.of(user));
-		if(member.update(user))
-			memberService.save(member);
-		
-		var jwt = jwtService.generateToken(User4Jwt.of(member));
 		var uuid = UUID.randomUUID().toString();
-		redisTemplate.opsForValue().set(uuid, jwt , 10L , TimeUnit.SECONDS);
+		try {
+			var token = api.getToken(code);
+			var user = api.getUserInfo(token);
+			var loginDetail = updateMemberService.createOrUpdate(user);
+			var jwt = jwtService.generateToken(User4Jwt.of(loginDetail));
+			redisTemplate.opsForValue().set(uuid, jwt , 10L , TimeUnit.SECONDS);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 			
         return "redirect:"+ frontEndUrl +"?id=" + uuid;
     }

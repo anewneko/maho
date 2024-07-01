@@ -27,7 +27,6 @@ public class Member extends DbEntity {
 	private UUID id;
 	private String username;
 	private String avatar;
-	private String speedkey;
 	private Long discordId;
 	private String email;
 	private Boolean isManager = false;
@@ -49,11 +48,6 @@ public class Member extends DbEntity {
 
 	public Member setAvatar(String avatar) {
 		this.avatar = avatar;
-		return this;
-	}
-
-	public Member setSpeedkey(String speedkey) {
-		this.speedkey = speedkey;
 		return this;
 	}
 

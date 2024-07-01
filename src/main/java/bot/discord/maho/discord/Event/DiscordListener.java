@@ -1,17 +1,21 @@
 package bot.discord.maho.discord.Event;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.context.ApplicationContext;
 
+import bot.discord.maho.database.CrudService.Impl.LoginDetailService;
 import bot.discord.maho.discord.Command.Command;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -74,9 +78,38 @@ public class DiscordListener extends  ListenerAdapter   {
 							  message.getContentDisplay(),
 							  String.join(",", proxyUrl));
 		}catch(Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	  }
+	
+	@Override
+    public void onButtonInteraction(ButtonInteractionEvent event) {
+		try {
+			var arr = event.getComponentId().split(":");
+			var spKeySvc = getBean(LoginDetailService.class);
+			var key = spKeySvc.findById(UUID.fromString(arr[1])).orElseThrow();
+			if ( !(key.getIsUsed() && key.getIsVerify()) && key.getIsUsed() || key.getExpireTime().before(new Date())) {
+				event.reply(" Speed Key 已失效").queue();
+				return;
+			}
+			switch(arr[0]) {
+				case "speed_key_confirm" -> {
+					key.setIsVerify(true)
+					   .setIsUsed(true);
+					event.reply(event.getUser().getName() + " 確認登入").queue();
+				}
+				case "speed_key_cancel" -> {
+					key.setIsUsed(true)
+					   .setIsVerify(false);
+					event.reply(event.getUser().getName() + " 拒絕登入").queue();
+				}
+			}
+			spKeySvc.save(key);
+		}catch(Exception e) {
+			e.printStackTrace();
+			event.reply("系統錯誤!").queue();
+		}
+    }
    
 	private void initCommands() {
 		try {
@@ -90,5 +123,9 @@ public class DiscordListener extends  ListenerAdapter   {
 			e2.printStackTrace();
 			isReady = false;
 		}
+	}
+	
+	private <T> T getBean(Class<T> clazz) {
+		return app.getBean(clazz);
 	}
 }

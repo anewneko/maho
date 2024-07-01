@@ -9,13 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
+import bot.discord.maho.security.Service.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
 public class SecurityTool {
-	private final JwtTokenUtil jwtService;
+	private final JwtService jwtService;
 	@Autowired private HttpServletRequest request;
 	
 	public void verift(String jwt , UserDetails user) throws AuthenticationException {
