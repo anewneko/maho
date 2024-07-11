@@ -9,19 +9,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
+import bot.discord.maho.security.Service.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
 public class SecurityTool {
-	private final JwtTokenUtil jwtService;
+	private final JwtService jwtService;
 	@Autowired private HttpServletRequest request;
 	
 	public void verift(String jwt , UserDetails user) throws AuthenticationException {
 		if (jwtService.validateToken(jwt, user)){
 			permit(user);
-			jwtService.generateToken(user);
+			var exp = jwtService.getExpirationDate(jwt);
+			if(exp.getTime() - System.currentTimeMillis() < 1000 * 60 * 60 * 24 )
+				jwtService.generateToken(user);
 		}
 		else 
 			throw new AuthenticationException();

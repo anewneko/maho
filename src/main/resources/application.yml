@@ -1,0 +1,43 @@
+logging:
+  level:
+    root: 'OFF'
+spring:
+  data:
+    redis:
+      client-type: jedis
+      database: 0
+      host: singapore-redis.render.com
+      password: ${redis_password}
+      port: 6379
+      ssl:
+        enabled: true
+      username: ${redis_user}
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+#    - com.mysql.cj.jdbc.Driver
+#    - org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+    password: root
+#    password: 7ihjPv61CdmexQzajP4jMhI47M26znUv
+    url: jdbc:mariadb://localhost:3306/bookking
+#    url: jdbc:mysql://localhost:3306/bookking
+#    url: jdbc:postgresql://dpg-cpndt4o8fa8c73aveueg-a.singapore-postgres.render.com/maho?ssl=true&sslmode=verify-full&sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory
+    username: root
+#    username: maho_user
+  devtools:
+    restart:
+      enabled: false
+  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: update
+    show-sql: false
+  profiles:
+    active: ${active}

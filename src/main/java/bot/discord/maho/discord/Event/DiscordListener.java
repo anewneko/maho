@@ -1,17 +1,21 @@
 package bot.discord.maho.discord.Event;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.context.ApplicationContext;
 
+import bot.discord.maho.database.CrudService.Impl.LoginDetailService;
 import bot.discord.maho.discord.Command.Command;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,9 +37,13 @@ public class DiscordListener extends  ListenerAdapter   {
 	
 	@Override
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-		if(!isReady) 
-			initCommands();
-		commands.get(event.getName()).commandAct(event);
+		try {
+			if(!isReady) 
+				initCommands();
+			commands.get(event.getName()).commandAct(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
     
 	@Override
@@ -44,12 +52,14 @@ public class DiscordListener extends  ListenerAdapter   {
 				%s 歡迎來到 プリコネR 戰隊 －【天都紀元】 的 Discord 頻道
 				如有意願加入，請輸入 /面試 進行面試。
 				""";
-		
-		var guild = event.getGuild();
-		guild.getTextChannelById(651478929550606366L)
-			 .sendMessage(String.format(welcome, event.getMember().getAsMention()))
-			 .queue();
-//		guild.addRoleToMember(event.getMember(), guild.getRoleById(683988941271334928L)).queue();
+		try {
+			var guild = event.getGuild();
+			guild.getTextChannelById(651478929550606366L)
+				 .sendMessage(String.format(welcome, event.getMember().getAsMention()))
+				 .queue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
 	
@@ -68,15 +78,54 @@ public class DiscordListener extends  ListenerAdapter   {
 							  message.getContentDisplay(),
 							  String.join(",", proxyUrl));
 		}catch(Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	  }
+	
+	@Override
+    public void onButtonInteraction(ButtonInteractionEvent event) {
+		try {
+			var arr = event.getComponentId().split(":");
+			var spKeySvc = getBean(LoginDetailService.class);
+			var key = spKeySvc.findById(UUID.fromString(arr[1])).orElseThrow();
+			if ( !(key.getIsUsed() && key.getIsVerify()) && key.getIsUsed() || key.getExpireTime().before(new Date())) {
+				event.reply(" Speed Key 已失效").queue();
+				return;
+			}
+			switch(arr[0]) {
+				case "speed_key_confirm" -> {
+					key.setIsVerify(true)
+					   .setIsUsed(true);
+					event.reply(event.getUser().getName() + " 確認登入").queue();
+				}
+				case "speed_key_cancel" -> {
+					key.setIsUsed(true)
+					   .setIsVerify(false);
+					event.reply(event.getUser().getName() + " 拒絕登入").queue();
+				}
+			}
+			spKeySvc.save(key);
+		}catch(Exception e) {
+			e.printStackTrace();
+			event.reply("系統錯誤!").queue();
+		}
+    }
    
 	private void initCommands() {
-		this.commands = app.getBeansOfType(Command.class)
-						   .values()
-						   .stream()
-						   .collect(Collectors.toMap(e -> e.getCmd(), e -> e));
-		isReady = true;
+		try {
+			
+			this.commands = app.getBeansOfType(Command.class)
+					.values()
+					.stream()
+					.collect(Collectors.toMap(e -> e.getCmd(), e -> e));
+			isReady = true;
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			isReady = false;
+		}
+	}
+	
+	private <T> T getBean(Class<T> clazz) {
+		return app.getBean(clazz);
 	}
 }

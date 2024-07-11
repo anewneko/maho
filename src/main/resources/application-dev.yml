@@ -1,0 +1,17 @@
+discord:
+  app:
+    client:
+      id: ${dev_client_id}
+    redirect: http://localhost:8081/mahoBotServer/redirect/mahoweb/homepage
+    frontend: http://localhost:3333
+    secret: ${dev_secret}
+  bot:
+    token: ${dev_token}
+    version: 1.0.0
+server:
+  port: 8081
+  servlet:
+    context-path: /mahoBotServer
+spring:
+  thymeleaf:
+    enabled: false

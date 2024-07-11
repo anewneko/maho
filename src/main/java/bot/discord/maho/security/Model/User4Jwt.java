@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import bot.discord.maho.database.Entity.Member;
+import bot.discord.maho.database.Entity.LoginDetail;
 import lombok.Data;
 @Data
 public class User4Jwt implements UserDetails {
@@ -49,12 +49,21 @@ public class User4Jwt implements UserDetails {
 		return false;
 	}
 	
-	public static User4Jwt of(Member member) {
+//	public static User4Jwt of(Member member) {
+//		var user = new User4Jwt();
+//		user.setUsername(member.getId().toString());
+//		if(member.getIsManager()) 
+//			user.setAuthorities(List.of(() -> "ROLE_MANAGER"));
+//		return user;
+//	}
+	
+	public static User4Jwt of(LoginDetail loginDetail) {
 		var user = new User4Jwt();
-		user.setUsername(member.getId().toString());
-		if(member.getIsManager()) 
+		user.setUsername(loginDetail.getId().toString());
+		if(loginDetail.getMember().getIsManager()) 
 			user.setAuthorities(List.of(() -> "ROLE_MANAGER"));
-		return user;
+        return user;
+		
 	}
 
 }

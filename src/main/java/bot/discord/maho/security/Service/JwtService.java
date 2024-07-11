@@ -1,4 +1,4 @@
-package bot.discord.maho.security.Component;
+package bot.discord.maho.security.Service;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -9,7 +9,6 @@ import java.util.function.Function;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,15 +16,12 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtTokenUtil {
+public class JwtService {
 	private final Key secretKey;
-	@Autowired private HttpServletResponse response;
 	
-	private JwtTokenUtil(Environment environment) throws NoSuchAlgorithmException {
+	private JwtService(Environment environment) throws NoSuchAlgorithmException {
 		String token = environment.getProperty("discord.bot.token");
 		secretKey = new SecretKeySpec(token.getBytes(), "HmacSHA256");
 	}
@@ -56,11 +52,8 @@ public class JwtTokenUtil {
         return expiration.before(new Date());
     }
 
-    public void generateToken(UserDetails userDetails) {
-    	Map<String, Object> claims = new HashMap<>();
-    	 Cookie cookie = new Cookie("Maho_token", doGenerateToken(claims, userDetails.getUsername()));
-         cookie.setPath("/");
-         response.addCookie(cookie);
+    public String generateToken(UserDetails userDetails) {
+         return doGenerateToken(new HashMap<>(), userDetails.getUsername());
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {

@@ -22,7 +22,10 @@ public class CommandManager {
 	public void setCommands() {
 		
 		var commands = app.getBeansOfType(Command.class);
-		commands.forEach((k, v) -> addCommand(v));
+		commands.forEach((k, v) -> {
+			if(!v.getClass().getSimpleName().contains("$"))
+				addCommand(v);
+		});
 		
         bot.updateCommands()
            .addCommands(cmds)
@@ -32,6 +35,6 @@ public class CommandManager {
 	private void addCommand(Command cmd) {
 		try {
 			cmds.add(cmd.setCommands());
-		} catch (Exception e) {/*e.printStackTrace();*/}
+		} catch (Exception e) {e.printStackTrace();}
 	}
 }

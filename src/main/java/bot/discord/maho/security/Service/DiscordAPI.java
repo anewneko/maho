@@ -1,4 +1,4 @@
-package bot.discord.maho.security.Component;
+package bot.discord.maho.security.Service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -26,30 +26,21 @@ public class DiscordAPI {
 	public DiscordToken getToken(String code) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-	    var redirectUrl = "http://localhost:8081/mahoBotServer/redirect/mahoweb/homepage";
-	    
 	    MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("code", code);
         map.add("client_id", clientId);
         map.add("client_secret", clientSecret);
         map.add("grant_type", "authorization_code");
         map.add("redirect_uri", redirectUrl);
-		
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-        
         return restTemplate.postForObject(token_url, request, DiscordToken.class);
 	}
 	
 	public DiscordUser getUserInfo(DiscordToken token) {
 		HttpHeaders headers = new HttpHeaders();
-        
-        headers = new HttpHeaders();
         headers.setBearerAuth(token.getAccess_token());
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        
-        
         return restTemplate.exchange(user_url,  HttpMethod.GET,  entity,  DiscordUser.class).getBody();
-		
 	}
 
 }

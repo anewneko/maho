@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import bot.discord.maho.database.Entity.Salary;
+import bot.discord.maho.database.Entity.LoginDetail;
 
-public interface SalaryRepository extends JpaRepository<Salary, UUID> {
+public interface LoginDetailRepository extends JpaRepository<LoginDetail, UUID> {
 
 }
