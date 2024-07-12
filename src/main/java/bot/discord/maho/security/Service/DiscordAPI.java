@@ -32,6 +32,7 @@ public class DiscordAPI {
         map.add("client_secret", clientSecret);
         map.add("grant_type", "authorization_code");
         map.add("redirect_uri", redirectUrl);
+        System.out.println(map);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
         return restTemplate.postForObject(token_url, request, DiscordToken.class);
 	}
