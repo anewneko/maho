@@ -20,5 +20,10 @@ public class LoginController {
 		loginManager.verifyUser(speedKey);
 		return ApiResponse.success();
 	}
+	
+	@GetMapping("/login/{speedKey}")
+	public ApiResponse getLogin(@PathVariable UUID speedKey) {
+		return ApiResponse.success(loginManager.login(speedKey));
+	}
 
 }

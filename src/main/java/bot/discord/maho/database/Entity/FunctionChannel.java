@@ -23,5 +23,6 @@ public class FunctionChannel {
 	private Long guildId;
 	private String function;
 	private Long channelId;
+	
 
 }
