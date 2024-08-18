@@ -65,7 +65,15 @@ public class LoginDetail {
 		return this;
 	}
 	
-	static public LoginDetail getCurrent() {
+	public <E extends Throwable> void ifUsedThrow(E e) throws E {
+		if(Boolean.TRUE.equals(this.isUsed)) throw e;
+	}
+	
+	public <E extends Throwable> void ifExpiredThrow(E e) throws E {
+		if(this.getExpireTime().before(new Date())) throw e;
+	}
+	
+	public static LoginDetail getCurrent() {
 		return new LoginDetail();
 	}
 	

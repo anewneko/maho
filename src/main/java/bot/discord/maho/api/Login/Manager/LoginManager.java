@@ -23,9 +23,9 @@ public class LoginManager {
 	private final JwtService jwtSvc;
 	
 	public void verifyUser(UUID speedKey) {
-		var key = spKeySvc.findById(speedKey).orElseThrow(() -> SpeedKeyNotFoundException.of());
-		if(key.getIsUsed()) throw SpeedKeyNotFoundException.of("This key is already used.");
-		if(key.getExpireTime().before(new Date())) throw SpeedKeyNotFoundException.of("This key is expired.");
+		var key = spKeySvc.findById(speedKey).orElseThrow(SpeedKeyNotFoundException::of);
+		key.ifUsedThrow(SpeedKeyNotFoundException.of("This key is already used."));
+		key.ifExpiredThrow(SpeedKeyNotFoundException.of("This key is expired."));
 		DateFormat dateFormat = DateFormat.getDateTimeInstance();
 		jda.getUserById(key.getMember().getDiscordId()).openPrivateChannel().queue((channel) -> {
             channel.sendMessage("你於 " + dateFormat.format(new Date()) + " \n嘗試使用SpeedKey登入マホロボ網頁")
