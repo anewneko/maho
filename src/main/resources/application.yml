@@ -29,3 +29,6 @@ spring:
   thymeleaf:
     enabled: false
 
+app:
+  frontend: ${front_host}
+
