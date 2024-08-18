@@ -43,15 +43,11 @@ public abstract class MahoRobotUnitTest {
 	protected MockHttpServletRequestBuilder request(RestFunction func, String path , Object body) throws Exception {
 		MockHttpServletRequestBuilder builder = null;
 		switch (func) {
-		case POST:
-			builder = post(path);
-			break;
-		case PUT:
-			builder = put(path);
-			break;
-		default:
-			throw new Exception("Not support");
+			case POST -> builder = post(path);
+			case PUT -> builder = put(path);
+			default -> throw new Exception("Not support");
 		}
+		
 		return builder
 				 .contentType("application/json")
 				 .header("Authorization", "Bearer " + jwtService.generateToken(User4Jwt.of(login)))
@@ -63,18 +59,10 @@ public abstract class MahoRobotUnitTest {
 	protected MockHttpServletRequestBuilder request(RestFunction func, String path) throws Exception  {
 		MockHttpServletRequestBuilder builder = null;
         switch (func) {
-        case GET:
-            builder = get(path);
-            break;
-		case POST:
-			builder = post(path);
-			break;
-		case PUT:
-			builder = put(path);
-			break;
-        case DELETE:
-            builder = delete(path);
-            break;
+	        case GET -> builder = get(path);
+			case POST -> builder = post(path);
+			case PUT -> builder = put(path);
+	        case DELETE -> builder = delete(path);
         }
         
         return builder
