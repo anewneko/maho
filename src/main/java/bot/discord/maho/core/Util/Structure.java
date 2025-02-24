@@ -3,6 +3,7 @@ package bot.discord.maho.core.Util;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import bot.discord.maho.core.Model.DbEntity;
 
 public class Structure {
+	private Structure() {}
 	
 	/** data :
 	 * {
@@ -21,9 +23,9 @@ public class Structure {
 	 */	
 	public static <T extends DbEntity> Map<UUID, T> toKeyValueMap(List<T> list) {
 		return list.stream()
-				   .filter(el -> el != null)
+				   .filter(Objects::nonNull)
 				   .filter(el -> el.getId() != null)
-				   .collect(Collectors.toMap(el -> el.getId(), 
+				   .collect(Collectors.toMap(DbEntity::getId, 
 										  	 el -> el, 
 										  	 (v1, v2) -> v1));
 	}
@@ -39,15 +41,15 @@ public class Structure {
 	 * }
 	 */	
 	public static <T extends DbEntity> List<Map<String, String>> toNumberValueMap(List<T> list , Function<T, String> vFunction) {
-		return list.stream()
-				   .filter(el -> el != null)
+		return list.stream()	
+				   .filter(Objects::nonNull)
 				   .map(el -> {
 					   Map<String,String> obj = new HashMap<>();
 					   obj.put("key", el.getId().toString());
 					   obj.put("value", vFunction.apply(el));
 					   return obj;
 				   })
-				   .collect(Collectors.toList());
+				   .toList();
 	}
 	
 

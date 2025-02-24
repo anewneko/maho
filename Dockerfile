@@ -1,3 +1,8 @@
+FROM maven:3.8.6-openjdk-17 AS build
+WORKDIR /app
+COPY . /app
+RUN mvn clean package
+
 FROM alpine:3
 RUN apk add --no-cache openjdk17
 WORKDIR /app

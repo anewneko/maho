@@ -66,19 +66,25 @@ public class Member extends DbEntity {
 		return this;
 	}
 	
+	public Member setId(UUID id) {
+		this.id = id;
+		return this;
+	}
+	
+	
 	public Boolean update(DiscordUser user) {
 		var isUpdate = false;
-		if (MahoTool.isEmpty(this.avatar)) {
+		if (MahoTool.isEmpty(avatar)) {
 			this.avatar = user.getAvatar();
 			isUpdate = true;
 		}
 		
-		if (MahoTool.isEmpty(this.email)) {
+		if (MahoTool.isEmpty(email)) {
 			this.email = user.getEmail();
 			isUpdate = true;
 		}
 		
-		if (MahoTool.isEmpty(this.username)) {
+		if (MahoTool.isEmpty(username)) {
 			this.username = user.getUsername();
 			isUpdate = true;
 		}
@@ -98,6 +104,7 @@ public class Member extends DbEntity {
 						   .setAvatar(dcUser.getAvatarUrl())
 						   .setUsername(dcUser.getName());
 	}
+
 	
 	
 	

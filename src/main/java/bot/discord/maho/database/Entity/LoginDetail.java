@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import bot.discord.maho.core.Model.DbEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ import lombok.Getter;
 @Table(name = "LoginDetail")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class LoginDetail {
+public class LoginDetail extends DbEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
