@@ -3,6 +3,9 @@ package bot.discord.maho.core.Util;
 import java.util.UUID;
 
 public class MahoTool {
+	private MahoTool() {}
+	
+	
 	public static String capitalizeFirstLetter(String input) {
         if (input == null || input.isEmpty()) 
             return input;

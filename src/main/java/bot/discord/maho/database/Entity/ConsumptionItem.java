@@ -27,7 +27,7 @@ public final class ConsumptionItem extends DbEntity{
 	private String discordId;
 	private Long userId;
 	private Date createTime = new Date();
-	public ConsumptionItem() {}
+	
 	public ConsumptionItem setItem(String item) {
 		this.item = item;
 		return this;

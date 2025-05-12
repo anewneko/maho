@@ -44,6 +44,7 @@ public class SecurityConfig{
             .authorizeHttpRequests(req -> req.requestMatchers(new AntPathRequestMatcher("/redirect/**"),
             		                                          new AntPathRequestMatcher("/member/jwt/**"),
             		                                          new AntPathRequestMatcher("/login/**"),
+            		                                          new AntPathRequestMatcher("/contactUs"),
             												  new AntPathRequestMatcher("/ping")).permitAll()
                                              .anyRequest().authenticated())
             .sessionManagement(sessionManagement -> 
