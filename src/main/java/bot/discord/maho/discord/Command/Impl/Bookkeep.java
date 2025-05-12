@@ -1,7 +1,5 @@
 package bot.discord.maho.discord.Command.Impl;
 
-import org.springframework.stereotype.Component;
-
 import bot.discord.maho.database.CrudService.Impl.ConsumptionItemService;
 import bot.discord.maho.database.Entity.ConsumptionItem;
 import bot.discord.maho.discord.Command.Command;
@@ -11,7 +9,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
-@Component
 @RequiredArgsConstructor
 public class Bookkeep implements Command{
 	final private ConsumptionItemService bk;

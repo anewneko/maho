@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import bot.discord.maho.discord.Command.Command;
@@ -17,7 +16,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.utils.FileUpload;
 
-@Component
 @RequiredArgsConstructor
 public class InterviewCommit implements Command  {
 	private final static String cmd = "提交";

@@ -15,12 +15,8 @@ public class BookkeepingApplication {
 		try {
 			SpringApplication app = new SpringApplication(BookkeepingApplication.class);
 			app.run(args);
-			
 		} 
-		catch (RuntimeException se) {
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+		catch (Exception e) {}
 			
 	}
 }

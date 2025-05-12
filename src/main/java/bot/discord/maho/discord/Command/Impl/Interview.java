@@ -3,7 +3,6 @@ package bot.discord.maho.discord.Command.Impl;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 
 import bot.discord.maho.discord.Command.Command;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
-@Component
 @RequiredArgsConstructor
 public class Interview implements Command {
 	
